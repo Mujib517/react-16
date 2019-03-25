@@ -1,19 +1,29 @@
 import React from 'react';
 import Product from './Product';
+import axios from 'axios';
 
 export default class ProductList extends React.Component {
 
+    constructor() {
+        super();
+
+        this.state = { products: [] };
+        axios.get("https://exp-rest-api.herokuapp.com/api/products")
+            .then((res) => {
+                console.log(res);
+                this.setState({ products: res.data.data });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    }
+
     render() {
-
-        const products = [{ id: 1, brand: "Nokia", model: "1100", price: 100, inStock: false,image:'https://www.gstatic.com/webp/gallery/1.jpg' },
-        { id: 2, brand: "Samsung", model: "Galaxy S10", price: 700, inStock: true,image: 'https://www.gstatic.com/webp/gallery/4.jpg' },
-        { id: 3, brand: "Apple", model: "IPhone X", price: 1000, inStock: true,image: 'https://www.gstatic.com/webp/gallery/5.jpg' }];
-
         // JSX
         return (
             <div>
                 <h1>Products</h1>
-                {products.map(product => <Product key={product.id} data={product} />)}
+                {this.state.products.map(product => <Product key={product.id} data={product} />)}
             </div>
         )
     }
