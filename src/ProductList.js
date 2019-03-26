@@ -8,22 +8,34 @@ export default class ProductList extends React.Component {
         super();
 
         this.state = { products: [] };
+        // making a web svc call using get request
         axios.get("https://exp-rest-api.herokuapp.com/api/products")
             .then((res) => {
-                console.log(res);
                 this.setState({ products: res.data.data });
             })
-            .catch(function (err) {
-                console.log(err);
+            .catch((err) => {
+                this.setState({ error: true });
             });
     }
 
+    showErrorMessageIfExists() {
+        return this.state.error ? <div className="alert alert-danger">Failed to load data</div> :
+            null;
+    }
+
+    renderProducts(){
+        return this.state.products.map(product => <Product key={product.id} data={product} />)
+    }
+
     render() {
-        // JSX
         return (
-            <div>
+            //jsx
+            <div class="col-sm-5">
                 <h1>Products</h1>
-                {this.state.products.map(product => <Product key={product.id} data={product} />)}
+
+                {this.showErrorMessageIfExists()}
+
+                {this.renderProducts()}
             </div>
         )
     }

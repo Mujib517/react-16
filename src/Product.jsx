@@ -17,7 +17,7 @@ export default (props) => {
     // const product = props.data;
     return <div>
         <h4>{brand} {model}</h4>
-        <img src={image} width="200" height="200" class="img img-thumbnail" />
+        {/* <img src={image} width="200" height="200" class="img img-thumbnail" /> */}
         <div>${price}</div>
         <div>InStock? : {inStock ? "Yes" : "No"}</div>
         <hr />
