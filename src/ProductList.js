@@ -16,6 +16,20 @@ export default class ProductList extends React.Component {
             .catch((err) => {
                 this.setState({ error: true });
             });
+
+            this.notify = this.notify.bind(this);
+    }
+
+    notify() {
+        console.log("Notification arrived");
+        // making a web svc call using get request
+        axios.get("https://exp-rest-api.herokuapp.com/api/products")
+            .then((res) => {
+                this.setState({ products: res.data.data });
+            })
+            .catch((err) => {
+                this.setState({ error: true });
+            });
     }
 
     showErrorMessageIfExists() {
@@ -23,8 +37,8 @@ export default class ProductList extends React.Component {
             null;
     }
 
-    renderProducts(){
-        return this.state.products.map(product => <Product key={product.id} data={product} />)
+    renderProducts() {
+        return this.state.products.map(product => <Product key={product.id} data={product} onNotify={this.notify} />)
     }
 
     render() {

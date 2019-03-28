@@ -5,7 +5,10 @@ export default class Product extends React.Component {
 
     onDeleteClick(id) {
         axios.delete("https://exp-rest-api.herokuapp.com/api/products/" + id)
-            .then(() => console.log("deleted"))
+            .then(() => {
+                console.log("deleted");
+                this.props.onNotify();
+            })
             .catch(() => console.log("error"));
     }
 
