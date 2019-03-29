@@ -6,7 +6,7 @@ export default class NewProduct extends React.Component {
 
     constructor() {
         super();
-        this.state = {product:{}};
+        this.state = { product: {} };
 
         this.onBrandChange = this.onBrandChange.bind(this);
         this.onModelChange = this.onModelChange.bind(this);
@@ -17,7 +17,7 @@ export default class NewProduct extends React.Component {
 
     onSave() {
         if (this.isValid()) {
-            axios.post(config.baseUrl + '/api/products', this.state)
+            axios.post(config.baseUrl + '/api/products', this.state.product)
                 .then(() => {
                     this.setState({ error: false, success: true });
                 })
@@ -31,23 +31,32 @@ export default class NewProduct extends React.Component {
     }
 
     isValid() {
-        return this.state.brand && this.state.model && this.state.price;
+        const { product } = this.state;
+        return product.brand && product.model && product.price;
     }
 
     onBrandChange(evt) {
-        this.setState({ brand: evt.target.value });
+        const product = this.state.product;
+        product.brand = evt.target.value;
+        this.setState({ product: product });
     }
 
     onModelChange(evt) {
-        this.setState({ model: evt.target.value });
+        const product = this.state.product;
+        product.model = evt.target.value;
+        this.setState({ product: product });
     }
 
     onPriceChange(evt) {
-        this.setState({ price: evt.target.value });
+        const product = this.state.product;
+        product.price = evt.target.value;
+        this.setState({ product: product });
     }
 
     onStockChange(evt) {
-        this.setState({ inStock: !evt.target.checked });
+        const product = this.state.product;
+        product.inStock = evt.target.value;
+        this.setState({ product: product });
     }
 
     showSuccessMsgIfExist() {
