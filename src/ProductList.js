@@ -1,6 +1,7 @@
 import React from 'react';
 import Product from './Product';
 import axios from 'axios';
+import config from './config';
 
 export default class ProductList extends React.Component {
 
@@ -9,7 +10,7 @@ export default class ProductList extends React.Component {
 
         this.state = { products: [] };
         // making a web svc call using get request
-        axios.get("https://exp-rest-api.herokuapp.com/api/products")
+        axios.get(config.baseUrl + "/api/products")
             .then((res) => {
                 this.setState({ products: res.data.data });
             })
@@ -17,13 +18,13 @@ export default class ProductList extends React.Component {
                 this.setState({ error: true });
             });
 
-            this.notify = this.notify.bind(this);
+        this.notify = this.notify.bind(this);
     }
 
     notify() {
         console.log("Notification arrived");
         // making a web svc call using get request
-        axios.get("https://exp-rest-api.herokuapp.com/api/products")
+        axios.get(config.baseUrl + "/api/products")
             .then((res) => {
                 this.setState({ products: res.data.data });
             })
