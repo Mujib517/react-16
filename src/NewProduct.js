@@ -61,24 +61,24 @@ export default class NewProduct extends React.Component {
 
     showSuccessMsgIfExist() {
         return this.state.success ?
-            <div class="alert alert-success">Successfully Saved!</div> :
+            <div className="alert alert-success">Successfully Saved!</div> :
             null;
     }
 
     showErrorMsgIfExist() {
         return this.state.error ?
-            <div class="alert alert-danger">Failed to save data</div> :
+            <div className="alert alert-danger">Failed to save data</div> :
             null;
     }
 
     showValidationError() {
         return this.state.invalid ?
-            <div class="alert alert-danger">Validation failed</div> :
+            <div className="alert alert-danger">Validation failed</div> :
             null;
     }
 
     render() {
-        return (<div class="col-sm-5">
+        return (<div className="col-sm-5">
             <h1>Add New Product</h1>
 
             {this.showSuccessMsgIfExist()}
@@ -86,24 +86,24 @@ export default class NewProduct extends React.Component {
 
             {this.showValidationError()}
 
-            <div class="form-group">
-                <input type="text" placeholder="Brand" class="form-control" onChange={this.onBrandChange} />
-                {this.state.product.brand ? null : <span class="text-danger">Required</span>}
-                {this.state.product.brand && this.state.product.brand.length < 3 ? <span class="text-danger">Min 3 chars</span> : null}
+            <div className="form-group">
+                <input type="text" placeholder="Brand" className="form-control" onChange={this.onBrandChange} />
+                {this.state.product.brand ? null : <span className="text-danger">Required</span>}
+                {this.state.product.brand && this.state.product.brand.length < 3 ? <span className="text-danger">Min 3 chars</span> : null}
             </div>
-            <div class="form-group">
-                <input type="text" placeholder="Model" class="form-control" onChange={this.onModelChange} />
-                {this.state.product.model ? null : <span class="text-danger">Required</span>}
+            <div className="form-group">
+                <input type="text" placeholder="Model" className="form-control" onChange={this.onModelChange} />
+                {this.state.product.model ? null : <span className="text-danger">Required</span>}
             </div>
-            <div class="form-group">
-                <input type="text" placeholder="Price" class="form-control" onChange={this.onPriceChange} />
-                {this.state.product.price ? null : <span class="text-danger">Required</span>}
+            <div className="form-group">
+                <input type="text" placeholder="Price" className="form-control" onChange={this.onPriceChange} />
+                {this.state.product.price ? null : <span className="text-danger">Required</span>}
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 InStock: <input type="checkbox" onChange={this.onStockChange} />
             </div>
-            <div class="form-group">
-                <button class="btn btn-success" onClick={this.onSave}>Save</button>
+            <div className="form-group">
+                <button className="btn btn-success" onClick={this.onSave}>Save</button>
             </div>
         </div>)
     }

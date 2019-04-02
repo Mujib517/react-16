@@ -39,13 +39,13 @@ export default class ProductList extends React.Component {
     }
 
     renderProducts() {
-        return this.state.products.map(product => <Product key={product.id} data={product} onNotify={this.notify} />)
+        return this.state.products.map(product => <Product key={product._id} data={product} onNotify={this.notify} />)
     }
 
     render() {
         return (
             //jsx
-            <div class="col-sm-5">
+            <div className="col-sm-5">
                 <h1>Products</h1>
 
                 {this.showErrorMessageIfExists()}

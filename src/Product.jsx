@@ -20,7 +20,7 @@ export default class Product extends React.Component {
             {/* <img src={image} width="200" height="200" class="img img-thumbnail" /> */}
             <div>${price}</div>
             <div>InStock? : {inStock ? "Yes" : "No"}</div>
-            <button class="btn btn-sm btn-danger" onClick={() => this.onDeleteClick(_id)}>Delete</button>
+            <button className="btn btn-sm btn-danger" onClick={() => this.onDeleteClick(_id)}>Delete</button>
             <hr />
         </div>
     }
