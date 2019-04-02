@@ -20,6 +20,7 @@ export default class NewProduct extends React.Component {
             axios.post(config.baseUrl + '/api/products', this.state.product)
                 .then(() => {
                     this.setState({ invalid: false, error: false, success: true });
+                    this.props.history.push('/products');
                 })
                 .catch(() => {
                     this.setState({ success: false, error: true });

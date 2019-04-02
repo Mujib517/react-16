@@ -2,6 +2,7 @@ import React from 'react';
 import Product from './Product';
 import axios from 'axios';
 import config from './config';
+import { Link } from 'react-router-dom';
 
 export default class ProductList extends React.Component {
 
@@ -47,7 +48,7 @@ export default class ProductList extends React.Component {
             //jsx
             <div className="col-sm-5">
                 <h1>Products</h1>
-
+                <Link to="/products/new" className="btn btn-success">Add New Product</Link>
                 {this.showErrorMessageIfExists()}
 
                 {this.renderProducts()}
