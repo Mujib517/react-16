@@ -19,7 +19,7 @@ export default class NewProduct extends React.Component {
         if (this.isValid()) {
             axios.post(config.baseUrl + '/api/products', this.state.product)
                 .then(() => {
-                    this.setState({ error: false, success: true });
+                    this.setState({ invalid: false, error: false, success: true });
                 })
                 .catch(() => {
                     this.setState({ success: false, error: true });
@@ -88,12 +88,16 @@ export default class NewProduct extends React.Component {
 
             <div class="form-group">
                 <input type="text" placeholder="Brand" class="form-control" onChange={this.onBrandChange} />
+                {this.state.product.brand ? null : <span class="text-danger">Required</span>}
+                {this.state.product.brand && this.state.product.brand.length < 3 ? <span class="text-danger">Min 3 chars</span> : null}
             </div>
             <div class="form-group">
                 <input type="text" placeholder="Model" class="form-control" onChange={this.onModelChange} />
+                {this.state.product.model ? null : <span class="text-danger">Required</span>}
             </div>
             <div class="form-group">
                 <input type="text" placeholder="Price" class="form-control" onChange={this.onPriceChange} />
+                {this.state.product.price ? null : <span class="text-danger">Required</span>}
             </div>
             <div class="form-group">
                 InStock: <input type="checkbox" onChange={this.onStockChange} />
