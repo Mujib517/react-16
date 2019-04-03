@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import * as moment from 'moment';
 import config from './config';
 
 export default class ProductDetail extends React.Component {
@@ -14,6 +15,10 @@ export default class ProductDetail extends React.Component {
             .catch(err => console.log(err));
     }
 
+    getRelativeTime(){
+        return moment(this.state.product.lastUpdated).fromNow();
+    }
+
     render() {
         return (<div className="col-sm-5">
             <br />
@@ -26,7 +31,7 @@ export default class ProductDetail extends React.Component {
                     <div>InStock: {this.state.product.inStock ? 'Yes' : 'No'}</div>
                 </div>
                 <div className="card-footer">
-                    <div>Last Updated: {this.state.product.lastUpdated}</div>
+                    <div>Last Updated: {this.getRelativeTime()}</div>
                 </div>
             </div>
         </div>);
