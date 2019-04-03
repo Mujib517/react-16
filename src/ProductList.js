@@ -43,6 +43,24 @@ export default class ProductList extends React.Component {
         return this.state.products.map(product => <Product key={product._id} data={product} onNotify={this.notify} />)
     }
 
+    //update
+    componentWillReceiveProps(props, newProps) {
+        console.log("new props received");
+    }
+
+    componentWillUpdate() {
+        console.log("Will Update");
+    }
+
+    shouldComponentUpdate() {
+        console.log("Should Update?");
+        return true;
+    }
+
+    componentDidUpdate() {
+        console.log("Updated");
+    }
+
     render() {
         return (
             //jsx

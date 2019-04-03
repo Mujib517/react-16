@@ -15,11 +15,21 @@ export default class ProductDetail extends React.Component {
             .catch(err => console.log(err));
     }
 
-    getRelativeTime(){
+    //mounting
+    componentWillMount() {
+        console.log("Before mounting");
+    }
+
+    componentDidMount() {
+        console.log("Mounted");
+    }
+
+    getRelativeTime() {
         return moment(this.state.product.lastUpdated).fromNow();
     }
 
     render() {
+        console.log("Rendering");
         return (<div className="col-sm-5">
             <br />
             <div className="card">
