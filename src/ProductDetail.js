@@ -5,14 +5,22 @@ import config from './config';
 
 export default class ProductDetail extends React.Component {
 
+    /*
+    Phases:
+
+        Initialization (setup props and state)
+
+        Mounting (componentWillMount, render, componentDidMount)
+
+        Update (componentWillReceiveProps, shouldComponentUpdate, 
+            componentWillUpdate, render, componentDidUpdate)
+
+        Unmounting (componentWillUnMount)
+*/
     constructor(props) {
         super(props);
 
         this.state = { product: {} };
-        const id = props.match.params.id;
-        axios.get(config.baseUrl + '/api/products/' + id)
-            .then(res => this.setState({ product: res.data }))
-            .catch(err => console.log(err));
     }
 
     //mounting
@@ -21,7 +29,10 @@ export default class ProductDetail extends React.Component {
     }
 
     componentDidMount() {
-        console.log("Mounted");
+        const id = this.props.match.params.id;
+        axios.get(config.baseUrl + '/api/products/' + id)
+        .then(res => this.setState({ product: res.data }))
+        .catch(err => console.log(err));
     }
 
     getRelativeTime() {
