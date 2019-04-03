@@ -9,6 +9,7 @@ import Header from './Header';
 import Footer from './Footer';
 import NewProduct from './NewProduct';
 import 'bootstrap/dist/css/bootstrap.css';
+import ProductDetail from './ProductDetail';
 
 const routing = (
     <BrowserRouter>
@@ -19,6 +20,7 @@ const routing = (
             <Route exact path="/products" component={ProductList} />
             <Route path="/contact" component={Contact} />
             <Route path="/products/new" component={NewProduct} />
+            <Route path="/products/:id" component={ProductDetail} />
         </Switch>
         <Footer />
     </BrowserRouter>

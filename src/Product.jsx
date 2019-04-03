@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Product extends React.Component {
@@ -14,9 +15,10 @@ export default class Product extends React.Component {
 
     render() {
         const { _id, brand, model, price, inStock } = this.props.data;
+        const url = '/products/' + _id;
         // const product = props.data;
         return <div>
-            <h4>{brand} {model}</h4>
+            <Link to={url}><h4>{brand} {model}</h4></Link>
             {/* <img src={image} width="200" height="200" class="img img-thumbnail" /> */}
             <div>${price}</div>
             <div>InStock? : {inStock ? "Yes" : "No"}</div>
