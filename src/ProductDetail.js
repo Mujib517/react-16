@@ -29,12 +29,18 @@ export default class ProductDetail extends React.Component {
         console.log("Before mounting");
     }
 
-    componentDidMount() {
-        this.setState({ loading: true });
-        const id = this.props.match.params.id;
-        axios.get(config.baseUrl + '/api/products/' + id)
-            .then(res => this.setState({ product: res.data, loading: false }))
-            .catch(err => this.setState({ loading: false }));
+    async componentDidMount() {
+        try {
+            this.setState({ loading: true });
+            const id = this.props.match.params.id;
+            const res = await axios.get(config.baseUrl + '/api/products/' + id)
+            // .then(res => this.setState({ product: res.data, loading: false }))
+            // .catch(err => this.setState({ loading: false }));
+            this.setState({ product: res.data, loading: false });
+        }
+        catch (err) {
+            this.setState({ loading: false })
+        }
     }
 
     getRelativeTime() {
