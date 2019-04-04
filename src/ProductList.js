@@ -3,6 +3,7 @@ import Product from './Product';
 import axios from 'axios';
 import config from './config';
 import { Link } from 'react-router-dom';
+import loader from './img/loader.gif';
 
 export default class ProductList extends React.Component {
 
@@ -11,15 +12,18 @@ export default class ProductList extends React.Component {
 
         this.state = { products: [] };
         // making a web svc call using get request
+        this.notify = this.notify.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ loading: true });
         axios.get(config.baseUrl + "/api/products")
             .then((res) => {
-                this.setState({ products: res.data.data });
+                this.setState({ products: res.data.data, loading: false });
             })
             .catch((err) => {
-                this.setState({ error: true });
+                this.setState({ error: true, loading: false });
             });
-
-        this.notify = this.notify.bind(this);
     }
 
     notify() {
@@ -61,15 +65,25 @@ export default class ProductList extends React.Component {
         console.log("Updated");
     }
 
+    showLoader(){
+        return this.state.loading ?
+                    <div className="loader">
+                        <img alt="loader" src={loader} />
+                        &nbsp; Loading...
+                </div> : null
+    }
+
     render() {
         return (
-            //jsx
-            <div className="col-sm-5">
-                <h1>Products</h1>
-                <Link to="/products/new" className="btn btn-success">Add New Product</Link>
-                {this.showErrorMessageIfExists()}
+            <div>
+                {this.showLoader()}
+                <div className="col-sm-5">
+                    <h1>Products</h1>
+                    <Link to="/products/new" className="btn btn-success">Add New Product</Link>
+                    {this.showErrorMessageIfExists()}
 
-                {this.renderProducts()}
+                    {this.renderProducts()}
+                </div>
             </div>
         )
     }

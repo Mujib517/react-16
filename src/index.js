@@ -10,6 +10,7 @@ import Footer from './Footer';
 import NewProduct from './NewProduct';
 import 'bootstrap/dist/css/bootstrap.css';
 import ProductDetail from './ProductDetail';
+import './App.css';
 
 const routing = (
     <BrowserRouter>

@@ -28,11 +28,12 @@ export default class ProductDetail extends React.Component {
         console.log("Before mounting");
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const id = this.props.match.params.id;
-        axios.get(config.baseUrl + '/api/products/' + id)
-        .then(res => this.setState({ product: res.data }))
-        .catch(err => console.log(err));
+        const res = await axios.get(config.baseUrl + '/api/products/' + id)
+        this.setState({ product:res.data });
+        // .then(res => this.setState({ product: res.data }))
+        // .catch(err => console.log(err));
     }
 
     getRelativeTime() {
