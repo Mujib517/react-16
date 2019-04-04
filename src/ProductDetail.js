@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import * as moment from 'moment';
 import config from './config';
+import Loader from './Loader';
 
 export default class ProductDetail extends React.Component {
 
@@ -28,12 +29,12 @@ export default class ProductDetail extends React.Component {
         console.log("Before mounting");
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.setState({ loading: true });
         const id = this.props.match.params.id;
-        const res = await axios.get(config.baseUrl + '/api/products/' + id)
-        this.setState({ product:res.data });
-        // .then(res => this.setState({ product: res.data }))
-        // .catch(err => console.log(err));
+        axios.get(config.baseUrl + '/api/products/' + id)
+            .then(res => this.setState({ product: res.data, loading: false }))
+            .catch(err => this.setState({ loading: false }));
     }
 
     getRelativeTime() {
@@ -41,21 +42,25 @@ export default class ProductDetail extends React.Component {
     }
 
     render() {
-        console.log("Rendering");
-        return (<div className="col-sm-5">
-            <br />
-            <div className="card">
-                <div className="card-header">
-                    {this.state.product.brand} {this.state.product.model}
+        return (
+            <div>
+                <Loader loading={this.state.loading} />
+                <div className="col-sm-5">
+                    <br />
+
+                    <div className="card">
+                        <div className="card-header">
+                            {this.state.product.brand} {this.state.product.model}
+                        </div>
+                        <div className="card-body">
+                            <div>$ {this.state.product.price}</div>
+                            <div>InStock: {this.state.product.inStock ? 'Yes' : 'No'}</div>
+                        </div>
+                        <div className="card-footer">
+                            <div>Last Updated: {this.getRelativeTime()}</div>
+                        </div>
+                    </div>
                 </div>
-                <div className="card-body">
-                    <div>$ {this.state.product.price}</div>
-                    <div>InStock: {this.state.product.inStock ? 'Yes' : 'No'}</div>
-                </div>
-                <div className="card-footer">
-                    <div>Last Updated: {this.getRelativeTime()}</div>
-                </div>
-            </div>
-        </div>);
+            </div >);
     }
 }

@@ -3,7 +3,7 @@ import Product from './Product';
 import axios from 'axios';
 import config from './config';
 import { Link } from 'react-router-dom';
-import loader from './img/loader.gif';
+import Loader from './Loader';
 
 export default class ProductList extends React.Component {
 
@@ -65,18 +65,19 @@ export default class ProductList extends React.Component {
         console.log("Updated");
     }
 
-    showLoader(){
-        return this.state.loading ?
-                    <div className="loader">
-                        <img alt="loader" src={loader} />
-                        &nbsp; Loading...
-                </div> : null
-    }
+    // showLoader(){
+    //     return this.state.loading ?
+    //                 <div className="loader">
+    //                     <img alt="loader" src={loader} />
+    //                     &nbsp; Loading...
+    //             </div> : null
+    // }
 
     render() {
         return (
             <div>
-                {this.showLoader()}
+                {/* {this.showLoader()} */}
+                <Loader loading={this.state.loading}/>
                 <div className="col-sm-5">
                     <h1>Products</h1>
                     <Link to="/products/new" className="btn btn-success">Add New Product</Link>
